@@ -1,0 +1,328 @@
+信息
+vGPU试用 用远程桌面：202.120.222.248
+milab 123456
+肺部和肋骨分割 https://github.com/TerryGriffin/COMP.5230Project
+语义分割 https://github.com/zjhuang22/maskscoring_rcnn
+
+调研
+
+生成式对抗网络（GAN, Generative Adversarial Networks ）
+	def. 深度学习模型; 复杂分布上无监督学习的方法之一;
+	模型通过框架中（至少）两个模块的互相博弈学习产生相当好的输出
+		生成模型（Generative Model）
+		判别模型（Discriminative Model）
+	实用中一般均使用深度神经网络作为 G 和 D 
+	一个优秀的GAN应用需要有良好的训练方法，否则可能由于神经网络模型的自由性而导致输出不理想。
+	应用：图像生成：超分辨率任务，语义分割等等。
+
+半监督语义分割的对抗性学习	
+
+
+数据集 https://competitions.codalab.org/competitions/17094	#https://github.com/imatge-upc/liverseg-2017-nipswsMyreferences: 	https://github.com/hfslyc/AdvSemiSeg
+				https://arxiv.org/abs/1802.07934	#论文
+				https://github.com/ChengBinJin/V-GAN-tensorflow
+
+#############################################################RemoteEnvs##########################################################
+
+python -V			Python 3.6.8
+conda --version		conda 4.6.2
+CUDA: 
+	control pannel -> NVIDIA Control Pannel -> help -> SysInfo -> components ->
+	NVCUDA.DLL	23.21.13.9205	NVIDIA CUDA 9.1.84 driver
+
+
+https://pytorch.org/ : Run this Command: 
+	conda install pytorch torchvision cudatoolkit = 9.0 -c pytorch
+
+The following packages will be UPDATED: 
+
+	conda: 			4.5.12-py37_0					--> 4.6.8-py37_0
+
+Proceed([y]/n)? y
+
+#################################################After丛政DestroyEnvs######################################################
+
+Python 3.7.1
+conda 4.6.8
+conda install pytorch torchvision cudatoolkit = 9.0 -c pytorch
+pytorch 1.0.1
+
+
+##########################################################Envs####################################################################
+##########################################################pytorch#################################################################
+
+python -V			Python 3.7.1
+conda --version		conda 4.5.12
+CUDA: 
+	control pannel -> NVIDIA Control Pannel -> help -> SysInfo -> components ->
+	NVCUDA.DLL	6.14.13.6822	NVIDIA CUDA 8.0.0 driver
+
+Anaconda Prompt
+	conda create -n pytorch python=3.7		# -n == --name		failed
+	
+	conda config --show channels
+
+.condarc
+channels:
+  - https://pypi.python.org/simple
+  - http://download.pytorch.org/whl/
+  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
+  - https://pypi.tuna.tsinghua.edu.cn/simple/
+  - http://mirrors.aliyun.com/pypi/simple/
+  - https://pypi.douban.com/simple/
+  - bioconda
+  - r
+  - conda-forge
+  - defaults
+show_channel_urls: true
+ssl_verify: true
+
+加了很多没用的镜像，全部删掉，只留个defaults，翻墙，再用conda install就没问题了
+
+(tensorflow) C:\Users\Administrator>conda install pytorch torchvision cudatoolki
+t=8.0 -c pytorch
+
+	The following packages will be downloaded:
+
+		package                    |            build
+		---------------------------|-----------------
+		certifi-2019.3.9           |           py36_0         156 KB  defaults
+		cffi-1.12.2                |   py36h7a1dbc1_1         224 KB  defaults
+		cudatoolkit-8.0            |                4       324.8 MB  defaults
+		libpng-1.6.36              |       h2a8f88b_0         550 KB  defaults
+		libtiff-4.0.10             |       hb898794_2         1.1 MB  defaults
+		ninja-1.8.2                |   py36he980bc4_1         110 KB  defaults
+		olefile-0.46               |           py36_0          49 KB  defaults
+		openssl-1.1.1b             |       he774522_1         5.7 MB  defaults
+		pillow-5.4.1               |   py36hdc69c19_0         698 KB  defaults
+		pycparser-2.19             |           py36_0         174 KB  defaults
+		pytorch-1.0.1              |py3.6_cuda80_cudnn7_1       367.7 MB  pytorch
+		torchvision-0.2.2          |             py_3          44 KB  pytorch
+		------------------------------------------------------------
+												Total:       701.2 MB
+
+	The following NEW packages will be INSTALLED:
+
+	  cffi               pkgs/main/win-64::cffi-1.12.2-py36h7a1dbc1_1
+	  cudatoolkit        pkgs/main/win-64::cudatoolkit-8.0-4
+	  freetype           pkgs/main/win-64::freetype-2.9.1-ha9979f8_1
+	  jpeg               pkgs/main/win-64::jpeg-9b-hb83a4c4_2
+	  libpng             pkgs/main/win-64::libpng-1.6.36-h2a8f88b_0
+	  libtiff            pkgs/main/win-64::libtiff-4.0.10-hb898794_2
+	  ninja              pkgs/main/win-64::ninja-1.8.2-py36he980bc4_1
+	  olefile            pkgs/main/win-64::olefile-0.46-py36_0
+	  pillow             pkgs/main/win-64::pillow-5.4.1-py36hdc69c19_0
+	  pycparser          pkgs/main/win-64::pycparser-2.19-py36_0
+	  pytorch            pytorch/win-64::pytorch-1.0.1-py3.6_cuda80_cudnn7_1
+	  tk                 pkgs/main/win-64::tk-8.6.8-hfa6e2cd_0
+	  torchvision        pytorch/noarch::torchvision-0.2.2-py_3
+	  xz                 pkgs/main/win-64::xz-5.2.4-h2fa13f4_4
+	  zstd               pkgs/main/win-64::zstd-1.3.7-h508b16e_0
+
+	The following packages will be UPDATED:
+
+	  certifi                                 2018.11.29-py36_0 --> 2019.3.9-py36_0
+	  openssl                                 1.1.1a-he774522_0 --> 1.1.1b-he774522_1
+	
+CUDA##############################################################################################################################################
+
+https://developer.nvidia.com/cuda-toolkit
+Download CUDA Toolkit 10.1
+	Operating System: Windows
+	Architecture: x86_64
+	Version: 7
+	Installer Type: exe(local)
+C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.1
+
+cuDNN############################################################################################################################################
+
+https://developer.nvidia.com/rdp/cudnn-download
+Download cuDNN v7.5.0 (Feb 25, 2019), for CUDA 10.1
+			cuDNN Library for Windows 7
+cudnn64_7.dll	 -> C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.1\bin
+cudnn.h			 -> C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.1\include
+cudnn.lib		 -> C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.1\lib\x64			
+
+
+CUDA + cuDNN#####################################################################################################################################
+
+#CUDA_SDK_PATH = C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.1\doc\html\cuda-samples
+CUDA_LIB_PATH = %CUDA_PATH%\lib\x64
+CUDA_BIN_PATH = %CUDA_PATH%\bin
+#CUDA_SDK_BIN_PATH = %CUDA_SDK_PATH%\bin\win64
+#CUDA_SDK_LIB_PATH = %CUDA_SDK_PATH%\common\lib\x64
+
+%CUDA_LIB_PATH%;%CUDA_BIN_PATH%;
+#%CUDA_SDK_LIB_PATH%;%CUDA_SDK_BIN_PATH%;
+
+C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.1\lib\x64;
+C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.1\bin;
+#C:\ProgramData\NVIDIA Corporation\CUDA Samples\v10.1\common\lib\x64；
+#C:\ProgramData\NVIDIA Corporation\CUDA Samples\v10.1\bin\win64；
+
+cd "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v9.1\extras\demo_suite"
+deviceQuery.exe		#Result = PASS
+bandwidthTest.exe	#Result = PASS
+
+cv2###############################################################################################################################################
+
+conda install -c https://conda.binstar.org/menpo opencv
+
+==> WARNING: A newer version of conda exists. <==
+  current version: 4.6.2
+  latest version: 4.6.8
+
+Please update conda by running
+
+    $ conda update -n base -c defaults conda
+	
+import cv2								#no module named cv2
+
+pip install opencv-python				#success
+
+	from .cv2 import *
+ImportError: DLL load failed: 找不到指定的模块。
+
+pip uninstall opencv_python
+
+http://www.lfd.uci.edu/~gohlke/pythonlibs/#opencv
+	Download opencv_python-4.0.1-CP37-cp37m-win_amd64.whl
+	H:\Anaconda\envs\tensorflow\Scripts
+	
+	pip install opencv_python-4.0.1-cp37-cp37m-win_amd64.whl
+	
+	opencv_python-4.0.1-cp37-cp37m-win_amd64.whl is not a supported wheel on this platform. 
+		解决方案参考：https://www.cnblogs.com/nice-forever/p/5371906.html	#版本不对，这个环境是py3.6.8的
+	
+	Redownload opencv_python-4.0.1-CP36-cp36m-win_amd64.whl
+	pip install opencv_python-4.0.1-cp36-cp36m-win_amd64.whl
+		Success
+
+matplotlib#########################################################################################################################################
+
+python -m pip install -U pip setuptools
+
+	Installing collected packages: pip, setuptools
+	  Found existing installation: pip 19.0.1
+		Uninstalling pip-19.0.1:
+		  Successfully uninstalled pip-19.0.1
+	  Found existing installation: setuptools 40.7.3
+		Uninstalling setuptools-40.7.3:
+		  Successfully uninstalled setuptools-40.7.3
+	Successfully installed pip-19.0.3 setuptools-40.8.0
+
+python -m pip install matplotlib
+
+	Successfully installed cycler-0.10.0 kiwisolver-1.0.1 matplotlib-3.0.3 pyparsing-2.3.1 python-dateutil-2.8.0
+
+
+https://github.com/hfslyc/AdvSemiSeg
+DEBUG################################################################################################################################################
+python evaluate_voc.py --pretrained-model semi0.125 --save-dir results
+#in metric.py
+change xrange into range
+import cv2
+change copy_reg into copyreg	#import copy_reg & copy_reg.*
+import argparse
+parser = argparse.ArgumentParser()
+args = parser.parse_args()				#原来为args=parse_args()
+
+#in train.py
+change print [sth.] into print([sth.])	#it's py3 not py2
+#from packaging import version
+change
+	if version.parse(torch.__version__) >= version.parse('0.4.0'):
+		interp = nn.Upsample(size=(input_size[1], input_size[0]), mode='bilinear', align_corners=True)
+    else:
+        interp = nn.Upsample(size=(input_size[1], input_size[0]), mode='bilinear')
+into
+	#if version.parse(torch.__version__) >= version.parse('0.4.0'):
+    interp = nn.Upsample(size=(input_size[1], input_size[0]), mode='bilinear', align_corners=True)
+    #else:
+        #interp = nn.Upsample(size=(input_size[1], input_size[0]), mode='bilinear')
+
+#in evaluate_voc.py
+#from packaging import version
+change
+	if version.parse(torch.__version__) >= version.parse('0.4.0'):
+		interp = nn.Upsample(size=(input_size[1], input_size[0]), mode='bilinear', align_corners=True)
+    else:
+        interp = nn.Upsample(size=(input_size[1], input_size[0]), mode='bilinear')
+into
+	#if version.parse(torch.__version__) >= version.parse('0.4.0'):
+    interp = nn.Upsample(size=(input_size[1], input_size[0]), mode='bilinear', align_corners=True)
+    #else:
+        #interp = nn.Upsample(size=(input_size[1], input_size[0]), mode='bilinear')
+
+python evaluate_voc.py --pretrained-model semi0.125 --save-dir results
+    raise RuntimeError('Attempting to deserialize object on a CUDA 
+	'RuntimeError: Attempting to deserialize object on a CUDA device but torch.cuda.is_available() is False. 
+	If you are running on a CPU-only machine, please use torch.load with map_location='cpu' to map your storages to the CPU.
+
+Download CudaToolkit & cuDNN
+
+python evaluate_voc.py --pretrained-model semi0.125 --save-dir results
+	AttributeError: 'NoneType' object has no attribute 'shape'	#image.shape与python当前版本(3.6.8)产生冲突
+	
+Traceback (most recent call last):
+  File "evaluate_voc.py", line 241, in <module>
+    main()
+  File "evaluate_voc.py", line 215, in main
+    for index, batch in enumerate(testloader):
+  File "H:\Anaconda\envs\tensorflow\lib\site-packages\torch\utils\data\dataloader.py", line 615, in __next__
+    batch = self.collate_fn([self.dataset[i] for i in indices])
+  File "H:\Anaconda\envs\tensorflow\lib\site-packages\torch\utils\data\dataloader.py", line 615, in <listcomp>
+    batch = self.collate_fn([self.dataset[i] for i in indices])
+  File "E:\AdvSemiSeg-master\dataset\voc_dataset.py", line 50, in __getitem__
+    size = image.shape
+AttributeError: 'NoneType' object has no attribute 'shape'
+#图像不存在，考虑修改或添加路径	#评估程序，需要先训练模型
+
+python train.py --snapshot-dir snapshots
+Traceback (most recent call last):
+  File "train.py", line 473, in <module>
+    main()
+  File "train.py", line 260, in main
+    np.random.shuffle(train_ids)
+  File "mtrand.pyx", line 4851, in mtrand.RandomState.shuffle
+  File "mtrand.pyx", line 4854, in mtrand.RandomState.shuffle
+TypeError: 'range' object does not support item assignment
+#xrange
+#range return range(object) maybe should be transfered into ...
+
+
+###########################################################USAGE##########################################################################
+
+Place VOC2012(http://vllab1.ucmerced.edu/~whung/adv-semi-seg/SegmentationClassAug.zip) dataset in `AdvSemiSeg/dataset/VOC2012`
+AdvSemiSeg/dataset/VOC2012/JPEGImages
+                          /SegmentationClassAug
+
+Training on VOC2012: 
+python train.py --snapshot-dir snapshots \
+                --partial-data 0.125 \
+                --num-steps 20000 \
+                --lambda-adv-pred 0.01 \
+                --lambda-semi 0.1 --semi-start 5000 --mask-T 0.2
+To evaluate trained model: 
+
+python evaluate_voc.py --restore-from snapshots/VOC_20000.pth \
+                       --save-dir results
+
+交叉熵损失函数 网络搭建 优化步骤
+迭代训练方式 生成判别
+
+
+############################################################newMachine##################################################################
+DESKTOP-H85S3
+TeamView ID: 1 246 209 820 Password: 2d1c8n
+x849eu
+Envs####################################################################
+CUDA
+NVCUDA.DLL	25.21.14.1701	NVIDIA CUDA 10.0.132 driver
+python 3.7.3
+conda 4.6.11
+
+
+typed-ast >= 1.3.0 "cpython"
+The conda.compat module is deprecated. will be removed in a future release
+
