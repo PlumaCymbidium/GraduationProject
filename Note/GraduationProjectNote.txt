@@ -316,7 +316,7 @@ python evaluate_voc.py --restore-from snapshots/VOC_20000.pth \
 DESKTOP-H85S3
 TeamView ID: 1 246 209 820 Password: 2d1c8n
 x849eu
-Envs####################################################################
+#Envs####################################################################
 CUDA
 NVCUDA.DLL	25.21.14.1701	NVIDIA CUDA 10.0.132 driver
 python 3.7.3
@@ -326,3 +326,32 @@ conda 4.6.11
 typed-ast >= 1.3.0 "cpython"
 The conda.compat module is deprecated. will be removed in a future release
 
+#run#####################################################################
+just record my progress: 
+nvidia control pannel -> 3D configuration ->configure Surround, PhysX -> ´¦ÀíÆ÷ -> GeForce RTX 2080
+mark /codes(directory) as sources root
+copy 	./.idea 
+		./data 
+		./evaluation 
+		./inference_outputs 
+		./pretrained 
+from 	/woalsdnd-v-gan-8b23f9c2b92d
+to 		/V-GAN-tensorflow-master
+
+training: 
+python main.py 	--train_interval=<int> 								# default: 1
+				--ratio_gan2seg=<int> 								# default: 10
+				--gpu_index=<int> 									# default: 0
+				--discriminator=[pixel|patch1|patch2|image] 		# default: image
+				--batch_size=<int> 									# default: 1
+				--dataset=[DRIVE|STARE] 							# default: STARE
+				--is_test=False										# default: False
+				
+test: 
+python main.py 	--is_test=True 
+				--discriminator=[pixel|patch1|patch2|image] 
+				--batch_size=<int> 
+				--dataset=[DRIVE|STARE]
+
+evaluation: 
+python evaluation.py
