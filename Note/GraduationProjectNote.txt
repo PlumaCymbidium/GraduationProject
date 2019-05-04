@@ -19,8 +19,9 @@ milab 123456
 
 
 数据集 https://competitions.codalab.org/competitions/17094	#https://github.com/imatge-upc/liverseg-2017-nipswsMyreferences: 	https://github.com/hfslyc/AdvSemiSeg
-				https://arxiv.org/abs/1802.07934	#论文
+				https://arxiv.org/abs/1802.07934		#论文
 				https://github.com/ChengBinJin/V-GAN-tensorflow
+				https://arxiv.org/pdf/1706.09318.pdf	#论文
 
 #############################################################RemoteEnvs##########################################################
 
